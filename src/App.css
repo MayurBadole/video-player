@@ -7,3 +7,10 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
+
+.video-unavailable {
+  text-align: center;
+  color: red;
+  font-size: 18px;
+  margin-top: 20px;
+}

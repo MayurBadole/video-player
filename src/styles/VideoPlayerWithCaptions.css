@@ -1,22 +1,31 @@
-.captions {
-    position: relative;
-    margin-top: 10px;
-}
+ .player-body {
+     display: flex;
+     justify-content: center;
+     position: relative;
+ }
 
-.caption {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 4px;
-}
+ .video-player {
+     width: 100%;
+ }
 
-.video-unavailable {
-    text-align: center;
-    color: red;
-    font-size: 18px;
-    margin-top: 20px;
-}
+ .captions {
+     position: absolute;
+     bottom: 10px;
+     left: 0;
+     width: 100%;
+     text-align: center;
+
+ }
+
+ .caption {
+     background-color: rgba(0, 0, 0, 0.7);
+     color: #fff;
+     padding: 5px 10px;
+     border-radius: 4px;
+     max-width: 60%;
+     margin: 0 auto;
+     margin-bottom: 38px;
+     white-space: pre-line;
+     text-align: center;
+
+ }
