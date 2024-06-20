@@ -13,12 +13,16 @@ function App() {
   useEffect(() => {
     setError(null);
   }, [videoUrl, setError]);
+
   return (
     <div className="App">
       <CaptionProvider>
         <h1>Video Captioner</h1>
         <VideoUploadersCustom setVideoUrl={setVideoUrl} />
-        {videoUrl && !error ? (
+        {error && (
+          <div className="video-unavailable">Video is not available</div>
+        )}
+        {videoUrl && !error && (
           <>
             <CaptionInput />
             <VideoPlayerWithCaptions
@@ -28,10 +32,6 @@ function App() {
             />
             <CaptionList />
           </>
-        ) : (
-          error && (
-            <div className="video-unavailable">Video is not available</div>
-          )
         )}
       </CaptionProvider>
     </div>
