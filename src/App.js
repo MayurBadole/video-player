@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import CaptionProvider from "./context/CaptionContext";
 import CaptionInput from "./components/CaptionInput";
@@ -10,19 +10,20 @@ function App() {
   const [videoUrl, setVideoUrl] = useState("");
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    setError(null);
-  }, [videoUrl, setError]);
+  const handleVideoUrlChange = (url) => {
+    setVideoUrl(url);
+    setError(false);
+  };
 
   return (
     <div className="App">
       <CaptionProvider>
         <h1>Video Captioner</h1>
-        <VideoUploadersCustom setVideoUrl={setVideoUrl} />
+        <VideoUploadersCustom setVideoUrl={handleVideoUrlChange} />
         {error && (
           <div className="video-unavailable">Video is not available</div>
         )}
-        {videoUrl && !error && (
+        {!error && videoUrl && (
           <>
             <CaptionInput />
             <VideoPlayerWithCaptions
