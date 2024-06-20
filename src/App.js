@@ -8,6 +8,7 @@ import VideoUploadersCustom from "./components/VideoUploaderCustom";
 
 function App() {
   const [videoUrl, setVideoUrl] = useState("");
+  const [error, setError] = useState(false);
 
   return (
     <div className="App">
@@ -16,9 +17,13 @@ function App() {
         <VideoUploadersCustom setVideoUrl={setVideoUrl} />
         {videoUrl && (
           <>
-            <CaptionInput />
-            <VideoPlayerWithCaptions videoUrl={videoUrl} />
-            <CaptionList />
+            {!error && <CaptionInput />}
+            <VideoPlayerWithCaptions
+              videoUrl={videoUrl}
+              error={error}
+              setError={setError}
+            />
+            {!error && <CaptionList />}
           </>
         )}
       </CaptionProvider>

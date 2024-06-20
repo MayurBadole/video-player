@@ -13,3 +13,10 @@
     padding: 5px 10px;
     border-radius: 4px;
 }
+
+.video-unavailable {
+    text-align: center;
+    color: red;
+    font-size: 18px;
+    margin-top: 20px;
+}

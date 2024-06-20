@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { CaptionContext } from "../context/CaptionContext";
- import "../styles/VideoPlayerWithCaptions.css";
+import "../styles/VideoPlayerWithCaptions.css";
 
-function VideoPlayerWithCaptions({ videoUrl }) {
+function VideoPlayerWithCaptions({ videoUrl, error, setError }) {
   const { captions } = useContext(CaptionContext);
   const [currentTime, setCurrentTime] = useState(0);
 
@@ -11,18 +11,38 @@ function VideoPlayerWithCaptions({ videoUrl }) {
     setCurrentTime(state.playedSeconds);
   };
 
+  const handleError = () => {
+    setError(true);
+  };
+
+  useEffect(() => {
+    setError(null);
+  }, [videoUrl, setError]);
+
   return (
     <div>
-      <ReactPlayer url={videoUrl} onProgress={handleProgress} controls />
-      <div className="captions">
-        {captions.map((caption, index) => (
-          <div key={index} className="caption">
-            {currentTime >= caption.start && currentTime <= caption.end && (
-              <span>{caption.text}</span>
-            )}
+      {error ? (
+        <div className="video-unavailable">Video is not available</div>
+      ) : (
+        <>
+          <ReactPlayer
+            url={videoUrl}
+            onProgress={handleProgress}
+            onError={handleError}
+            controls
+            className="video-player"
+          />
+          <div className="captions">
+            {captions.map((caption, index) => (
+              <div key={index} className="caption">
+                {currentTime >= caption.start && currentTime <= caption.end && (
+                  <span>{caption.text}</span>
+                )}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
     </div>
   );
 }
